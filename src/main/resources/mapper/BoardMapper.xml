@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.green.springfirst.board.BoardMapper">
+<mapper namespace="com.green.springfirst.board.BoardMapper"><!-- 인터페이스 만들고 mapper -->
     <insert id="insBoard">
         INSERT INTO board
         SET title = #{title}
@@ -10,8 +10,7 @@
         , writer = #{writer}
     </insert>
     <select id="selBoardList">
-        SELECT iboard, title, writer, created_at as
-        createdAt <!-- created_at추가하고 싶을 때는 BoardVo에서 setCreated_at으로 setter이용 혹은 알리아스-->
+        SELECT iboard, title, writer, created_at as createdAt <!-- created_at추가하고 싶을 때는 BoardVo에서 setCreated_at으로 setter이용 혹은 알리아스-->
         From board
     </select>
 
@@ -29,7 +28,6 @@
         WHERE iboard = #{iboard}
 
     </update>
-
 
     <delete id="delBoard">
         DELETE FROM board

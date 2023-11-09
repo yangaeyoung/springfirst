@@ -13,21 +13,26 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BoardService {
-    private final BoardMapper boardMapper;
+    private final BoardMapper boardMapper;//인터페이스명
 
-    public List<BoardVo> getBoard(){
-        return boardMapper.selBoardList();
-    }
-
-    public BoardDetailVo getBoardDetail(@PathVariable int iboard){
-        return boardMapper.selBoardById(iboard);
-    }
-
-    public int insBoard(BoardInsDto dto){
+    public int insBoard(BoardInsDto dto) {
         return boardMapper.insBoard(dto);
     }
 
-    public int delBoard(int iboard){ return  boardMapper.delBoard(iboard);}
+    public List<BoardVo> getBoard() {
+        return boardMapper.selBoardList();
+    }
 
-    public int putBoard(BoardUpDto dto) {return boardMapper.updBoard(dto);}
+    public BoardDetailVo getBoardDetail(@PathVariable int iboard) {
+        return boardMapper.selBoardById(iboard);
+    }
+
+    public int putBoard(BoardUpDto dto) {
+        return boardMapper.updBoard(dto);//xml의 select id와 동일해야 함
+    }
+
+    public int delBoard(int iboard) {
+        return boardMapper.delBoard(iboard);
+    }
+
 }

@@ -16,10 +16,17 @@ public class BoardController {
 
     private final BoardService service;
 
-    @GetMapping("/board")// "/board" = 주소값  get으로 요청 응답
-    public List<BoardVo> getBoard(){
+    @PostMapping("/board")// 주소값이 같으나 요청이 get으로 들어왔을 때와 post로 들어왔을 때 구분이 될 수 있음
+    @ResponseBody // controller 였으면 이걸 사용
+    public ResVo insBoard(@RequestBody BoardInsDto dto){ // json형태로 매핑해서 응답
+        int result = service.insBoard(dto);
+        return new ResVo(result);
+    }// postman-post-body.row.json-내용 입력
+
+    @GetMapping("/board")
+    public List<BoardVo> getBoard(){// 테이블 전체를 불러오기 - 매개변수 X
         return service.getBoard();
-    }
+    }// postman-get-http://localhost:8080/board - body에 테이블 전체 출력
 
     @GetMapping("/board/{iboard}")
     public BoardDetailVo getBoardDetail(@PathVariable int iboard){// 파라미터 iboard에 {iboard}가 담김
@@ -30,14 +37,6 @@ public class BoardController {
     @PutMapping("/board")
     public ResVo putBoard(@RequestBody BoardUpDto dto){
         int result = service.putBoard(dto);
-        return new ResVo(result);
-    }
-
-
-    @PostMapping("/board")// 주소값이 같으나 요청이 get으로 들어왔을 때와 post로 들어왔을 때 구분이 될 수 있음
-    @ResponseBody // controller 였으면 이걸 사용
-    public ResVo insBoard(@RequestBody BoardInsDto dto){ // json형태로 매핑해서 응답
-        int result = service.insBoard(dto);
         return new ResVo(result);
     }
 
